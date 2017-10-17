@@ -11,7 +11,6 @@ class Beauty extends React.Component {
     super(props);
 
     this.state = {
-      home: '0',
       now: '0',
       bt: 'loading',
       data: [],
@@ -26,7 +25,7 @@ class Beauty extends React.Component {
     fetch(getHome, { method: 'get' })
     .then(response => { return response.json() })  
     .then(data => {
-      this.setState({ home: data.home, now: data.home}); 
+      this.setState({now: data.home}); 
       this.changeContent(data.home);     
     });
   }
