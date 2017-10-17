@@ -1,9 +1,10 @@
 import React from 'react'
 import { Grid, Button } from 'react-bootstrap'
-import BeautyImgContainer from './BeautyImgContainer';
+import BeautyImgContainer from './BeautyImgContainer'
 
 const getHome = 'https://crawlerserver.herokuapp.com/api/beauty/home';
 const reqUrl = 'https://crawlerserver.herokuapp.com/api/beauty?page=';
+const loadingClass = 'wrap-loading loading loading-4';
 
 class Beauty extends React.Component {
   
@@ -12,10 +13,11 @@ class Beauty extends React.Component {
 
     this.state = {
       now: '0',
-      bt: 'loading',
+      bt: 'Hid',
       data: [],
       flag: [],
-      show: []
+      show: [],
+      loading: 'wrap-loading loading loading-4'
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -45,8 +47,9 @@ class Beauty extends React.Component {
         for(let i = 0 ; i < data.length ; ++i)
           show[show.length] = (<BeautyImgContainer data={data[i]} flag={0}/>);
 
+        this.setState({ loading: ''});
         this.setState({ show: [...this.state.show, ...show] });
-        this.setState({ bt: 'more' });
+        this.setState({ bt: 'Vis' });
       }
     });
   }
@@ -58,7 +61,8 @@ class Beauty extends React.Component {
 
     this.setState({
       now: now,
-      bt: 'loading...'
+      bt: 'Hid',
+      loading: loadingClass
     });
     this.changeContent(now);
     this.componentDidMount();
@@ -73,7 +77,10 @@ class Beauty extends React.Component {
   render() {
     return(<div>
       <Grid fluid={true}>{this.state.show}</Grid>
-      <Button bsStyle="default" bsSize="large" onClick={this.handleClick}>{this.state.bt}</Button>
+      <div className={this.state.bt}>
+      <Button bsStyle="default" bsSize="large" onClick={this.handleClick}>More</Button>
+      </div>
+      <div className={this.state.loading}></div>
     </div>);
   }
 
@@ -92,9 +99,7 @@ class Beauty extends React.Component {
     }.bind(this), 5000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this._timer);
-  }
+  componentWillUnmount() { clearInterval(this._timer); }
 }
 
 export default Beauty
