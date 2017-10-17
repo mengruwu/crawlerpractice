@@ -1,29 +1,34 @@
 import React from 'react'
 import { Carousel, PageHeader } from 'react-bootstrap';
 import ImgContainer from './ImgContainer';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const content = {
-  music: (<p>Easy to know Ranking</p>),
-  beauty: (<p>Big picture to browse and enjoy yourself</p>),
-  weather: (<p>Supply you weather forecast in Taiwan</p>)
+  music: (<p>Easy to know Ranking.</p>),
+  beauty: (<p>Big picture to browse and enjoy yourself.</p>),
+  weather: (<p>Supply you weather forecast in Taiwan. Coming soon...</p>)
 }
 
 const carouselInstance = (
   <Carousel>
-    <Carousel.Item>
-      <ImgContainer name="music"/>
-      <Carousel.Caption>
-        <h3>Music</h3>
-        { content.music }
-      </Carousel.Caption>
-    </Carousel.Item>
-    <Carousel.Item>
-      <ImgContainer name="beauty"/>
-      <Carousel.Caption>
-        <h3>Beauty</h3>
-        { content.beauty }
-      </Carousel.Caption>
-    </Carousel.Item>
+    <LinkContainer to='/music'>
+      <Carousel.Item>
+        <ImgContainer name="music"/>
+        <Carousel.Caption>
+          <h3>Music</h3>
+          { content.music }
+        </Carousel.Caption>
+      </Carousel.Item>
+    </LinkContainer>
+    <LinkContainer to='/beauty'>
+      <Carousel.Item>
+        <ImgContainer name="beauty"/>
+        <Carousel.Caption>
+          <h3>Beauty</h3>
+          { content.beauty }
+        </Carousel.Caption>
+      </Carousel.Item>
+    </LinkContainer>
     <Carousel.Item>
       <ImgContainer name="weather"/>
       <Carousel.Caption>

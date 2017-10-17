@@ -9,7 +9,8 @@ const myLife = (
     <div style={ divStyle }>
         <p>I graduated earlier from NTHU(National Tsing-Hua University). 2013Sept.-2017Fub.</p>
         <p>I major in Computer Science. Have lots of fun in learning program language.</p>
-        <p>Now I am learning ReactJS myself and trying to find a job fitting me.</p>
+        <p>Now I am learning ReactJS myself and improving my capability in crawling.</p>
+        <p>My back-end system uses NodeJS and cheerio to implement my crawler practice.</p>
         <p>Please feel free to contact me : ray7102ray7102@gmail.com</p>
     </div>
 );
