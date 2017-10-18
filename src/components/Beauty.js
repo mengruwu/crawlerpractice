@@ -7,7 +7,6 @@ const reqUrl = 'https://crawlerserver.herokuapp.com/api/beauty?page=';
 const loadingClass = 'wrap-loading loading loading-4';
 
 class Beauty extends React.Component {
-  
   constructor(props) {
     super(props);
 
@@ -21,13 +20,14 @@ class Beauty extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    //this.handleScroll = this.handleScroll.bind(this);
     this.changeContent = this.changeContent.bind(this);
     this.nextPage = this.nextPage.bind(this);
 
     fetch(getHome, { method: 'get' })
     .then(response => { return response.json() })  
     .then(data => {
-      this.setState({now: data.home}); 
+      this.setState({ now: data.home }); 
       this.changeContent(data.home);     
     });
   }
@@ -37,19 +37,24 @@ class Beauty extends React.Component {
     .then(res => {return res.json();})
     .then(data => {
       if(data !== undefined && data.length > 0) {
-        var tmp = [];
-        for(let i = 0 ; i < data.length ; ++i)
-          tmp[tmp.length]=0;
-        this.setState({ 
-          flag: [...this.state.flag, ...tmp],
-          data: [...this.state.data, ...data] });
+        var flag = [];
         var show = [];
-        for(let i = 0 ; i < data.length ; ++i)
-          show[show.length] = (<BeautyImgContainer data={data[i]} flag={0}/>);
+        for(let i = 0 ; i < data.length ; ++i) {
+          show[show.length] = (<BeautyImgContainer data={ data[i] } flag={ 0 }/>);
+          flag[flag.length] = 0;
+        }
 
-        this.setState({ loading: ''});
-        this.setState({ show: [...this.state.show, ...show] });
-        this.setState({ bt: 'Vis' });
+        this.setState({ 
+          loading: '',
+          bt: 'Vis',
+          show: [...this.state.show, ...show],
+          flag: [...this.state.flag, ...flag],
+          data: [...this.state.data, ...data]
+        });
+      }
+      if(data.length < 5) {
+        let now = this.nextPage(this.state.now);
+        this.changeContent(now);
       }
     });
   }
@@ -66,6 +71,17 @@ class Beauty extends React.Component {
     });
     this.changeContent(now);
     this.componentDidMount();
+  }
+
+  handleScroll() {
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight) {
+      console.log('87');
+    }
   }
 
   nextPage(page) {
@@ -85,21 +101,27 @@ class Beauty extends React.Component {
   }
 
   componentDidMount() {
+    //window.addEventListener("scroll", this.handleScroll);
     this._timer = setInterval(function() {
-      var newF = this.state.flag;
-      for(let i = 0 ; i < newF.length ; ++i) 
-        newF[i] = (++newF[i] === this.state.data[i].children.length) ? 0 : newF[i]
-
-      this.setState({ flag: newF });
+      var newF = this.state.flag;      
       var show = [];
-      for(let i = 0 ; i < newF.length ; ++i)
-        show[show.length] = (<BeautyImgContainer data={this.state.data[i]} flag={newF[i]}/>)
-      
-      this.setState({ show: show });
-    }.bind(this), 5000);
+
+      for(let i = 0 ; i < newF.length ; ++i) {
+        newF[i] = (++newF[i] === this.state.data[i].children.length) ? 0 : newF[i];
+        show[show.length] = (<BeautyImgContainer data={this.state.data[i]} flag={newF[i]}/>);
+      }
+
+      this.setState({ 
+        show: show,
+        flag: newF 
+      });
+    }.bind(this), 4000);
   }
 
-  componentWillUnmount() { clearInterval(this._timer); }
+  componentWillUnmount() { 
+    //window.removeEventListener("scroll", this.handleScroll);
+    clearInterval(this._timer); 
+  }
 }
 
 export default Beauty

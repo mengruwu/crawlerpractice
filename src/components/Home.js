@@ -1,5 +1,5 @@
 import React from 'react'
-import { Carousel, PageHeader } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import ImgContainer from './ImgContainer';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -42,8 +42,6 @@ const carouselInstance = (
 const Home = () => (
   <div align='center'>
     { carouselInstance }
-    <PageHeader><small>Contact me : ray7102ray7102@gmail.com</small>
-    </PageHeader>
   </div>
 )
 

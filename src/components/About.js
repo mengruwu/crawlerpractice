@@ -1,38 +1,33 @@
 import React from 'react'
-import { Jumbotron, Panel} from 'react-bootstrap'
+import { Panel, Row, Col, Thumbnail } from 'react-bootstrap'
 import AboutMe from './AboutMe';
 import AboutWebsite from './AboutWebsite';
 
-const title1 = (
-  <h3>About Me</h3>
-);
-
-const title2 = (
+const title = (
   <h3>About This Website</h3>
 );
 
-const divStyle = {
-  textAlign: 'left',
-  padding: 30
-}
-
 const jumbotronInstance = (
-  <Jumbotron>
-    <div style={ divStyle }>
+    <div style={{ padding: 20 }}>
       <h1>Welcome to my website!</h1>
       <p>This is a simple crawler practice website!</p>
-      <Panel header={title1}  bsStyle="success">
-        <AboutMe />
-      </Panel>
-      <Panel header={title2}  bsStyle="info">
-        <AboutWebsite />
-      </Panel>
+      <Row>
+        <Col md={4}>
+          <Thumbnail src='https://i.imgur.com/dR5WL8u.png'>
+            <AboutMe />
+          </Thumbnail>
+        </Col>
+        <Col md={8}>
+          <Panel header={title}  bsStyle="info">
+            <AboutWebsite />
+          </Panel>
+        </Col>
+      </Row>
     </div>
-  </Jumbotron>
 );
 
 const About = () => (
-  <div>
+  <div style={{textAlign: 'left'}}>
     { jumbotronInstance }
   </div>
 )
