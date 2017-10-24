@@ -16,7 +16,7 @@ class Beauty extends React.Component {
       data: [],
       flag: [],
       show: [],
-      loading: 'wrap-loading loading loading-4'
+      loading: loadingClass
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -27,14 +27,13 @@ class Beauty extends React.Component {
     fetch(getHome, { method: 'get' })
     .then(response => { return response.json() })  
     .then(data => {
-      this.setState({ now: data.home }); 
       this.changeContent(data.home);     
     });
   }
 
   changeContent(page) {
     fetch(reqUrl + page, { method: 'get' })
-    .then(res => {return res.json();})
+    .then(res => { return res.json(); })
     .then(data => {
       if(data !== undefined && data.length > 0) {
         var flag = [];
@@ -45,6 +44,7 @@ class Beauty extends React.Component {
         }
 
         this.setState({ 
+          now: page,
           loading: '',
           bt: 'Vis',
           show: [...this.state.show, ...show],
@@ -54,6 +54,11 @@ class Beauty extends React.Component {
       }
       if(data.length < 5) {
         let now = this.nextPage(this.state.now);
+        
+        this.setState({
+          bt: 'Hid',
+          loading: loadingClass
+        });
         this.changeContent(now);
       }
     });
@@ -65,7 +70,6 @@ class Beauty extends React.Component {
     var now = this.nextPage(this.state.now);
 
     this.setState({
-      now: now,
       bt: 'Hid',
       loading: loadingClass
     });
@@ -94,7 +98,7 @@ class Beauty extends React.Component {
     return(<div>
       <Grid fluid={true}>{this.state.show}</Grid>
       <div className={this.state.bt}>
-      <Button bsStyle="default" bsSize="large" onClick={this.handleClick}>More</Button>
+        <Button bsStyle="default" bsSize="large" onClick={this.handleClick}>More</Button>
       </div>
       <div className={this.state.loading}></div>
     </div>);

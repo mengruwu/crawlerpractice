@@ -2,6 +2,7 @@ import React from 'react'
 import { Panel, Row, Col, Thumbnail } from 'react-bootstrap'
 import AboutMe from './AboutMe';
 import AboutWebsite from './AboutWebsite';
+import me from './assets/me.png'
 
 const title = (
   <h3>About This Website</h3>
@@ -13,7 +14,7 @@ const jumbotronInstance = (
       <p>This is a simple crawler practice website!</p>
       <Row>
         <Col md={4}>
-          <Thumbnail src='https://i.imgur.com/dR5WL8u.png'>
+          <Thumbnail src={ me }>
             <AboutMe />
           </Thumbnail>
         </Col>

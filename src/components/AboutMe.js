@@ -5,7 +5,7 @@ const divStyle = {
 };
 
 const myLife = (
-    <p>I graduated earlier from NTHU(National Tsing-Hua University 2013Sep-2017Fub).
+    <p>I graduated earlier from NTHU (National Tsing-Hua University 2013Sep - 2017Feb).
     I major in Computer Science. Have lots of fun in learning programming.
     Now I am learning ReactJS myself and improving my crawling skill.
     My back-end system uses NodeJS and cheerio to implement my server.<br/>
@@ -14,7 +14,7 @@ const myLife = (
 
 const AboutMe = () => (
     <div style={ divStyle }>
-    <h3>About me</h3>
+    <h3>About Me</h3>
     { myLife }
     </div>
 );
