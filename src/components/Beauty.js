@@ -24,7 +24,7 @@ class Beauty extends React.Component {
     this.changeContent = this.changeContent.bind(this);
     this.nextPage = this.nextPage.bind(this);
 
-    fetch(getHome, { method: 'get' })
+    fetch(getHome, { method: 'get', mode: 'no-cors' })
     .then(response => { return response.json() })  
     .then(data => {     
       this.setState({ now: data.home }); 
@@ -33,7 +33,7 @@ class Beauty extends React.Component {
   }
 
   changeContent(page) {
-    fetch(reqUrl + page, { method: 'get' })
+    fetch(reqUrl + page, { method: 'get', mode: 'no-cors' })
     .then(res => { return res.json(); })
     .then(data => {
       if(data !== undefined && data.length > 0) {

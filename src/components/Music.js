@@ -11,7 +11,7 @@ class Music extends React.Component {
     super(props);
     this.state = {};
 
-    fetch(req_url, {method: 'get'})
+    fetch(req_url, {method: 'get', mode: 'no-cors'})
     .then(response => {
       if (!response.ok) throw new Error(response.statusText)
       return response.json()
