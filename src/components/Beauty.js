@@ -2,8 +2,8 @@ import React from 'react'
 import { Grid, Button } from 'react-bootstrap'
 import BeautyImgContainer from './BeautyImgContainer'
 
-const getHome = 'https://crawlerserver.herokuapp.com/api/beauty/home';
-const reqUrl = 'https://crawlerserver.herokuapp.com/api/beauty?page=';
+const getHome = 'http://140.112.29.193:5000/api/beauty/home';
+const reqUrl = 'http://140.112.29.193:5000/api/beauty/?page=';
 const loadingClass = 'wrap-loading loading loading-4';
 
 class Beauty extends React.Component {
