@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-var req_url = 'http://140.112.29.193:5000/api/music';
+var req_url = 'https://crawlerserver.herokuapp.com/api/music';
 
 var titles = [];
 
