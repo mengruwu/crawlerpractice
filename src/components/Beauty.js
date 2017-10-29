@@ -26,8 +26,7 @@ class Beauty extends React.Component {
 
     fetch(getHome, { method: 'get' })
     .then(response => { return response.json() })  
-    .then(data => {     
-      this.setState({ now: data.home }); 
+    .then(data => {
       this.changeContent(data.home);     
     });
   }
@@ -43,6 +42,7 @@ class Beauty extends React.Component {
           show[show.length] = (<BeautyImgContainer data={ data[i] } flag={ 0 }/>);
           flag[flag.length] = 0;
         }
+
         this.setState({ 
           now: page,
           loading: '',
@@ -54,6 +54,7 @@ class Beauty extends React.Component {
       }
       if(data.length < 5) {
         let now = this.nextPage(this.state.now);
+        
         this.setState({
           bt: 'Hid',
           loading: loadingClass
@@ -111,7 +112,7 @@ class Beauty extends React.Component {
 
       for(let i = 0 ; i < newF.length ; ++i) {
         newF[i] = (++newF[i] === this.state.data[i].children.length) ? 0 : newF[i];
-        show[show.length] = (<BeautyImgContainer data={ this.state.data[i] } flag={newF[i]}/>);
+        show[show.length] = (<BeautyImgContainer data={this.state.data[i]} flag={newF[i]}/>);
       }
 
       this.setState({ 
